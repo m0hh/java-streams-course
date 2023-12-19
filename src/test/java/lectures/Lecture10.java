@@ -16,6 +16,7 @@ public class Lecture10 {
       Lists.newArrayList("Susy", "Ali")
   );
 
+
   @Before
   public void setUp() {
     System.out.println(arrayListOfNames);
@@ -24,12 +25,22 @@ public class Lecture10 {
   @Test
   public void withoutFlatMap() throws Exception {
 //    [Mariam, Alex, Ismail, John, Alesha, Andre, Susy, Ali]
+    List<String> names = Lists.newArrayList();
+    for (List<String> listOfNames : arrayListOfNames){
+      for(String name : listOfNames){
+        names.add(name);
+      }
+    }
+    System.out.println(names);
 
   }
 
   @Test
   public void withFlatMap() throws Exception {
 //   [Mariam, Alex, Ismail, John, Alesha, Andre, Susy, Ali]
+    List<String> names = arrayListOfNames.stream().flatMap(List::stream)
+            .collect(Collectors.toList());
+    System.out.println(names);
 
   }
 
